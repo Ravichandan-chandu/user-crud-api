@@ -218,3 +218,14 @@ docker-compose down -v
 ## License
 
 This project is open source and available under the MIT License.
+## CI Pipeline
+
+This project uses GitHub Actions for Continuous Integration.
+
+On every push or pull request to `main`, the pipeline:
+- Checks out the code
+- Sets up Java 21
+- Runs Maven tests
+- Builds the application
+
+CI status can be viewed in the GitHub Actions tab.
