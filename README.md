@@ -51,13 +51,12 @@ The application environment is provisioned inside a **Linux virtual machine** to
 
 ### Steps
 
-```bash
+```bash```
 cd iac
 vagrant up
 vagrant ssh
 
 ---
-
 
 Ansible automatically:
 
@@ -154,6 +153,12 @@ Controller tests (MockMvc)
 
 Repository tests (H2)
 
+🤖 AI Usage Disclosure
+
+AI tools were used for guidance, explanations.
+All implementation, configuration, execution, and validation were performed by the author.
+
+
 👤 Author
 
 Ravichandan Kodijuttu
@@ -162,7 +167,3 @@ DSTI – DevOps Course
 GitHub Repository:
 https://github.com/Ravichandan-chandu/user-crud-api
 
-🤖 AI Usage Disclosure
-
-AI tools were used for guidance, explanations.
-All implementation, configuration, execution, and validation were performed by the author.
