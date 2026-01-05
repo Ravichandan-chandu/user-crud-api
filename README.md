@@ -162,7 +162,7 @@ AI tools were used for guidance, explanations.
 All implementation, configuration, execution, and validation were performed by the author.
 
 
-##👤 Author
+## 👤 Author
 
 Ravichandan Kodijuttu
 DSTI – DevOps Course
