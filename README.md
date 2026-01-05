@@ -55,7 +55,7 @@ The application environment is provisioned inside a **Linux virtual machine** to
 ```bash
 cd iac
 vagrant up
-vagrant ssh
+vagrant ssh```
 
 
 
