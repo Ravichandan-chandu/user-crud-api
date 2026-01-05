@@ -49,9 +49,10 @@ The focus of this project is not only application development, but also **automa
 
 The application environment is provisioned inside a **Linux virtual machine** to ensure consistency across environments.
 
+
 ### Steps
 
-```bash```
+```bash
 cd iac
 vagrant up
 vagrant ssh
@@ -89,7 +90,7 @@ The application is deployed on a Kubernetes cluster with a dedicated persistence
 Below is the verification of the running pods and the assigned **NodePorts**:
 
 ```bash
-$ kubectl get all
+kubectl get all
 NAME                                   READY   STATUS    RESTARTS   AGE
 pod/user-crud-api-6f88fc4568-ndvc8     1/1     Running   0          25m
 pod/user-crud-mysql-747cd5fd5c-rzfq7   1/1     Running   1          14h
@@ -97,6 +98,7 @@ pod/user-crud-mysql-747cd5fd5c-rzfq7   1/1     Running   1          14h
 NAME                            TYPE       PORT(S)          AGE
 service/user-crud-api-service   NodePort   8080:30080/TCP   19h
 service/user-crud-mysql         NodePort   3306:30081/TCP   19h
+
 
 
 Persistence (PVC)
