@@ -101,15 +101,16 @@ service/user-crud-mysql         NodePort   3306:30081/TCP   19h
 
 ```
 
-Persistence (PVC)
+## Persistence (PVC)
 To ensure data is not lost when pods restart, a Persistent Volume Claim is configured:
 
+```bash
 $ kubectl get pvc
 NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   AGE
 mysql-pvc   Bound    pvc-7c49a096-f3d8-468f-82c7-aa2fb13f94d4   1Gi        RWO            10m
+```
 
-
-🔁 CI/CD Pipeline (GitHub Actions)
+## 🔁 CI/CD Pipeline (GitHub Actions)
 
 This project uses GitHub Actions for Continuous Integration.
 
@@ -126,7 +127,7 @@ Builds the application
 CI execution status is available in the GitHub Actions tab.
 
 
-🖼 Screenshots
+## 🖼 Screenshots
 
 All execution evidence is available in the screenshots/ directory, including:
 
@@ -140,7 +141,7 @@ Kubernetes pods, services, and PVC
 
 VM provisioning with Vagrant & Ansible
 
-🧪 Testing
+## 🧪 Testing
 
 Run tests locally:
 
@@ -155,13 +156,13 @@ Controller tests (MockMvc)
 
 Repository tests (H2)
 
-🤖 AI Usage Disclosure
+## 🤖 AI Usage Disclosure
 
 AI tools were used for guidance, explanations.
 All implementation, configuration, execution, and validation were performed by the author.
 
 
-👤 Author
+##👤 Author
 
 Ravichandan Kodijuttu
 DSTI – DevOps Course
