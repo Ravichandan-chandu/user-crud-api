@@ -55,11 +55,11 @@ The application environment is provisioned inside a **Linux virtual machine** to
 ```bash
 cd iac
 vagrant up
-vagrant ssh```
-
+vagrant ssh
+```
 ---
 
-Ansible automatically:
+## Ansible automatically:
 
 Installs Java 21
 
@@ -99,7 +99,7 @@ NAME                            TYPE       PORT(S)          AGE
 service/user-crud-api-service   NodePort   8080:30080/TCP   19h
 service/user-crud-mysql         NodePort   3306:30081/TCP   19h
 
-
+```
 
 Persistence (PVC)
 To ensure data is not lost when pods restart, a Persistent Volume Claim is configured:
