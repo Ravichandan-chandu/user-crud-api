@@ -3,7 +3,7 @@ spring:
     name: user-crud-api
   
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:userdb}?createDatabaseIfNotExist=true
+    url: jdbc:mysql://mysql:3306/userdb
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:rootpassword}
     driver-class-name: com.mysql.cj.jdbc.Driver

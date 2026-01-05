@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-crud-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-crud-api
+  template:
+    metadata:
+      labels:
+        app: user-crud-api
+    spec:
+      containers:
+        - name: user-crud-api
+          image: ravichandan/user-crud-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: "user-crud-mysql"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_NAME
+              value: "userdb"
+            - name: DB_USERNAME
+              value: "root"
+            - name: DB_PASSWORD
+              value: "rootpassword"

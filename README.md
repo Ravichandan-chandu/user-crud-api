@@ -1,231 +1,111 @@
-# User CRUD API
+# 🚀 User CRUD API – DevOps Final Project
 
-A Spring Boot application that provides CRUD operations for user management with MySQL database.
+This project is a comprehensive demonstration of the **end-to-end DevOps lifecycle**, developed as part of the **DSTI DevOps Course**.  
+It showcases how a production-ready Spring Boot application can be built, tested, automated, containerized, provisioned using Infrastructure as Code, and deployed on Kubernetes.
 
-## Features
+The focus of this project is not only application development, but also **automation, reproducibility, and reliability** across the full DevOps toolchain.
 
-- ✅ Full CRUD operations (Create, Read, Update, Delete)
-- ✅ MySQL database integration
-- ✅ Health check endpoint
-- ✅ Input validation
-- ✅ Exception handling
-- ✅ Comprehensive unit tests
-- ✅ Docker support
-- ✅ Docker Compose for easy deployment
+---
 
-## Technology Stack
+## 📖 Table of Contents
 
-- **Java 21**
-- **Spring Boot 3.4.3**
-- **Spring Data JPA**
-- **MySQL 8.0**
-- **H2 Database** (for testing)
-- **Maven**
-- **Docker & Docker Compose**
-- **JUnit 5 & Mockito** (for testing)
+- Features  
+- Tech Stack  
+- Infrastructure as Code  
+- Containerization (Docker)  
+- Kubernetes Orchestration  
+- CI/CD Pipeline  
+- Testing  
+- Screenshots  
+- Author & AI Disclosure  
 
-## Prerequisites
+---
 
-- Java 21 or higher
-- Maven 3.6+
-- MySQL 8.0+ (or use Docker)
-- Docker & Docker Compose (optional, for containerized deployment)
+## ✨ Features
 
-## Getting Started
+- **Core Application**: Java Spring Boot REST API with full CRUD functionality  
+- **Database**: Persistent MySQL storage  
+- **Health Checks**: Dedicated endpoint to validate application and database connectivity  
+- **CI/CD**: Automated build and test pipeline using GitHub Actions  
+- **Infrastructure as Code**: Fully automated VM provisioning with Vagrant & Ansible  
+- **Containerization**: Dockerized application for portability  
+- **Orchestration**: Kubernetes deployment using Minikube  
+- **Persistence**: Kubernetes Persistent Volumes (PV) and Persistent Volume Claims (PVC)  
 
-### 1. Clone the repository
+---
 
-```bash
-cd C:\codebase\local\user-crud-api
-```
+## 🛠 Tech Stack
 
-### 2. Configure MySQL Database
+- **Backend**: Java 21, Spring Boot 3.4.3, Maven  
+- **Database**: MySQL 8.0 (Production), H2 (Testing)  
+- **Infrastructure**: Vagrant, Ansible  
+- **Containerization**: Docker, Docker Compose  
+- **Orchestration**: Kubernetes (Minikube)  
+- **CI/CD**: GitHub Actions  
 
-Update `src/main/resources/application.yml` with your MySQL credentials (or use environment variables):
+---
 
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/userdb?createDatabaseIfNotExist=true
-    username: root
-    password: rootpassword
-```
+## 🏗 Infrastructure as Code (Vagrant & Ansible)
 
-### 3. Build the application
+The application environment is provisioned inside a **Linux virtual machine** to ensure consistency across environments.
+
+### Steps
 
 ```bash
-mvn clean package
-```
+cd iac
+vagrant up
+vagrant ssh
 
-### 4. Run the application
 
-```bash
-java -jar target/user-crud-api-1.0.0.jar
-```
 
-The application will start on `http://localhost:8080`
 
-## Running with Docker Compose
+---
 
-The easiest way to run the application with MySQL:
+## 📦 Containerization (Docker Hub)
 
-```bash
-docker-compose up --build
-```
+The application image is built and pushed to Docker Hub automatically via the CI/CD pipeline.
+* **Docker Hub Repository**: [https://hub.docker.com/r/ravichandan/user-crud-api](https://hub.docker.com/r/ravichandan/user-crud-api)
+* **Pull Command**: `docker pull ravichandan/user-crud-api:latest`
 
-This will:
-- Start a MySQL 8.0 container
-- Build and start the Spring Boot application
-- Configure networking between containers
+---
 
-## API Endpoints
+## ☸️ Kubernetes Orchestration (Minikube)
 
-### Health Check
-- **GET** `/api/health` - Check application and database health
+The application is deployed on a Kubernetes cluster with a dedicated persistence layer.
 
-### User Operations
-- **POST** `/api/users` - Create a new user
-- **GET** `/api/users` - Get all users
-- **GET** `/api/users/{id}` - Get user by ID
-- **PUT** `/api/users/{id}` - Update user
-- **DELETE** `/api/users/{id}` - Delete user
-
-### Example Request (Create User)
+### Deployment Status
+Below is the verification of the running pods and the assigned **NodePorts**:
 
 ```bash
-curl -X POST http://localhost:8080/api/users \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "phone": "1234567890"
-  }'
-```
+$ kubectl get all
+NAME                                   READY   STATUS    RESTARTS   AGE
+pod/user-crud-api-6f88fc4568-ndvc8     1/1     Running   0          25m
+pod/user-crud-mysql-747cd5fd5c-rzfq7   1/1     Running   1          14h
 
-### Example Request (Get All Users)
+NAME                            TYPE       PORT(S)          AGE
+service/user-crud-api-service   NodePort   8080:30080/TCP   19h
+service/user-crud-mysql         NodePort   3306:30081/TCP   19h
 
-```bash
-curl http://localhost:8080/api/users
-```
 
-### Example Request (Health Check)
+Persistence (PVC)
+To ensure data is not lost when pods restart, a Persistent Volume Claim is configured:
 
-```bash
-curl http://localhost:8080/api/health
-```
+$ kubectl get pvc
+NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   AGE
+mysql-pvc   Bound    pvc-7c49a096-f3d8-468f-82c7-aa2fb13f94d4   1Gi        RWO            10m
+🖼 Screenshots
 
-## Testing
+All execution evidence is available in the screenshots/ directory, including:
 
-Run all tests:
+Application running
 
-```bash
-mvn test
-```
+CI pipeline execution
 
-### Test Coverage
+Docker container execution
 
-- **Unit Tests**: Service layer with Mockito
-- **Repository Tests**: JPA repository with H2 in-memory database
-- **Controller Tests**: MockMvc for REST API testing
-- **Integration Tests**: Application context and configuration tests
-- **Health Check Tests**: Database connection verification
+Kubernetes pods, services, and PVC
 
-## Project Structure
-
-```
-user-crud-api/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/usercrud/
-│   │   │   ├── UserCrudApiApplication.java
-│   │   │   ├── controller/
-│   │   │   │   ├── HealthCheckController.java
-│   │   │   │   └── UserController.java
-│   │   │   ├── dto/
-│   │   │   │   └── UserDTO.java
-│   │   │   ├── entity/
-│   │   │   │   └── User.java
-│   │   │   ├── exception/
-│   │   │   │   ├── DuplicateEmailException.java
-│   │   │   │   ├── GlobalExceptionHandler.java
-│   │   │   │   └── ResourceNotFoundException.java
-│   │   │   ├── repository/
-│   │   │   │   └── UserRepository.java
-│   │   │   └── service/
-│   │   │       └── UserService.java
-│   │   └── resources/
-│   │       └── application.yml
-│   └── test/
-│       ├── java/com/example/usercrud/
-│       │   ├── UserCrudApiApplicationTest.java
-│       │   ├── controller/
-│       │   │   ├── HealthCheckControllerTest.java
-│       │   │   └── UserControllerTest.java
-│       │   ├── repository/
-│       │   │   └── UserRepositoryTest.java
-│       │   └── service/
-│       │       └── UserServiceTest.java
-│       └── resources/
-│           └── application-test.yml
-├── Dockerfile
-├── docker-compose.yml
-├── pom.xml
-└── README.md
-```
-
-## Environment Variables
-
-You can configure the application using environment variables:
-
-- `DB_HOST` - MySQL host (default: localhost)
-- `DB_PORT` - MySQL port (default: 3306)
-- `DB_NAME` - Database name (default: userdb)
-- `DB_USERNAME` - Database username (default: root)
-- `DB_PASSWORD` - Database password (default: rootpassword)
-
-## Docker Build
-
-Build the Docker image manually:
-
-```bash
-docker build -t user-crud-api .
-```
-
-Run the container:
-
-```bash
-docker run -p 8080:8080 \
-  -e DB_HOST=host.docker.internal \
-  -e DB_USERNAME=root \
-  -e DB_PASSWORD=rootpassword \
-  user-crud-api
-```
-
-## Stopping the Application
-
-If running with Docker Compose:
-
-```bash
-docker-compose down
-```
-
-To remove volumes:
-
-```bash
-docker-compose down -v
-```
-
-## License
-
-This project is open source and available under the MIT License.
-## CI Pipeline
-
-This project uses GitHub Actions for Continuous Integration.
-
-On every push or pull request to `main`, the pipeline:
-- Checks out the code
-- Sets up Java 21
-- Runs Maven tests
-- Builds the application
-
-CI status can be viewed in the GitHub Actions tab.
+VM provisioning with Vagrant & Ansible
+Final Author Note
+Author: Ravichandan Kodijuttu
+Project Link: [Paste Your GitHub URL Here]

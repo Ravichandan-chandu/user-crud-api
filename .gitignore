@@ -65,3 +65,5 @@ application-local.yml
 *.swp
 *.bak
 *~
+.vagrant/
+iac/.vagrant/
