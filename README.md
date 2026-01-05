@@ -9,15 +9,15 @@ The focus of this project is not only application development, but also **automa
 
 ## 📖 Table of Contents
 
-- Features  
-- Tech Stack  
-- Infrastructure as Code  
-- Containerization (Docker)  
-- Kubernetes Orchestration  
-- CI/CD Pipeline  
-- Testing  
-- Screenshots  
-- Author & AI Disclosure  
+- ✨ Features  
+- 🛠 Tech Stack  
+- 🏗 Infrastructure as Code (Vagrant & Ansible)  
+- 📦 Containerization (Docker Hub)  
+- ☸️ Kubernetes Orchestration (Minikube)  
+- 🔁 CI/CD Pipeline (GitHub Actions)  
+- 🧪 Testing  
+- 🖼 Screenshots  
+- 👤 Author & 🤖 AI Disclosure  
 
 ---
 
@@ -56,6 +56,19 @@ cd iac
 vagrant up
 vagrant ssh
 
+---
+
+
+Ansible automatically:
+
+Installs Java 21
+
+Installs and configures MySQL
+
+Deploys the Spring Boot application
+
+Performs a health check to verify successful startup
+
 
 
 
@@ -93,6 +106,25 @@ To ensure data is not lost when pods restart, a Persistent Volume Claim is confi
 $ kubectl get pvc
 NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   AGE
 mysql-pvc   Bound    pvc-7c49a096-f3d8-468f-82c7-aa2fb13f94d4   1Gi        RWO            10m
+
+
+🔁 CI/CD Pipeline (GitHub Actions)
+
+This project uses GitHub Actions for Continuous Integration.
+
+On every push to the main branch, the pipeline:
+
+Checks out the source code
+
+Sets up Java 21
+
+Runs Maven tests
+
+Builds the application
+
+CI execution status is available in the GitHub Actions tab.
+
+
 🖼 Screenshots
 
 All execution evidence is available in the screenshots/ directory, including:
@@ -106,6 +138,31 @@ Docker container execution
 Kubernetes pods, services, and PVC
 
 VM provisioning with Vagrant & Ansible
-Final Author Note
-Author: Ravichandan Kodijuttu
-Project Link: [Paste Your GitHub URL Here]
+
+🧪 Testing
+
+Run tests locally:
+
+mvn test
+
+
+Testing includes:
+
+Unit tests (service layer)
+
+Controller tests (MockMvc)
+
+Repository tests (H2)
+
+👤 Author
+
+Ravichandan Kodijuttu
+DSTI – DevOps Course
+
+GitHub Repository:
+https://github.com/Ravichandan-chandu/user-crud-api
+
+🤖 AI Usage Disclosure
+
+AI tools were used for guidance, explanations.
+All implementation, configuration, execution, and validation were performed by the author.
